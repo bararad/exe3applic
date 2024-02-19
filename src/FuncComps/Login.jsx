@@ -63,13 +63,32 @@ export default function Login(props) {
                 console.log('User with matching username and password exists.');
                 // save in session storage
                 sessionStorage.setItem('connectedUser', JSON.stringify(founduser));
+                Swal.fire({
+                    icon: "success",
+                    title: "Logged in successfully",
+                    text: "Go to profile",
+                });
+                clearFileds();
             } else {
-                console.log('User with matching username and password does not exist in the array.');
+                console.log('NO matching user.');
+                Swal.fire({
+                    icon: "error",
+                    title: "There is no registered user with this data",
+                    text: "check your inputs",                    
+                });
             }
         } else {
             //users array is empty
             console.log('You have to register first');
-        }
+        } Swal.fire({
+            icon: "error",
+            title: "There is no registered users in the system",
+            text: "Register first!",                    
+        });
+    }
+    const clearFileds=()=>{
+        setUserName({name:''}),
+        setPassword({pw:''})
     }
 
     return (
