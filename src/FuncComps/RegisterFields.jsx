@@ -219,7 +219,7 @@ export default function RegisterFields(props) {
         //creating array of userError and user to check that all fileds were validated and aren't empty
         let validations = Object.values(userError);
         let userFildes = Object.values(user);
-
+        
         console.log('validations: ', validations);
         console.log('userFildes: ', userFildes);
 
@@ -232,7 +232,8 @@ export default function RegisterFields(props) {
                 text: "Something went wrong!",
                 footer: 'There is invalid error you didnt fix'
             });
-        } else if (userFildes.some((value) => value === '')) {
+        } 
+        else if (userFildes.some((value) => value === '')) {
             //At least one filed is empty
             console.log('At least one filed is empty');
             Swal.fire({

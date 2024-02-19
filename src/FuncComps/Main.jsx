@@ -14,6 +14,7 @@ export default function Main() {
 
     //gets user from child and adds it to the list
     const getUserFromChild = (user) => {
+        console('in main',user);
         let newUsers = [...usersList, user];
         // console.log('Main- updated user list', newUsers);
 
@@ -21,9 +22,7 @@ export default function Main() {
         setUsersList(newUsers);
     }
 
-    const getLoginUserDetails = (email, password) => {
-
-    }
+ 
 
     //Check local storage on component mount- only when the page loaded
     useEffect(() => {
