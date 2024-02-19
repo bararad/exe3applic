@@ -219,7 +219,7 @@ export default function RegisterFields(props) {
         //creating array of userError and user to check that all fileds were validated and aren't empty
         let validations = Object.values(userError);
         let userFildes = Object.values(user);
-        
+
         console.log('validations: ', validations);
         console.log('userFildes: ', userFildes);
 
@@ -232,7 +232,7 @@ export default function RegisterFields(props) {
                 text: "Something went wrong!",
                 footer: 'There is invalid error you didnt fix'
             });
-        } 
+        }
         else if (userFildes.some((value) => value === '')) {
             //At least one filed is empty
             console.log('At least one filed is empty');
@@ -295,15 +295,17 @@ export default function RegisterFields(props) {
                 <Typography>Sign up</Typography>
             </Box>
 
-            <FormControl fullWidth sx={{ mb: '1rem',display:'flex',flexDirection:'row',}}>
-                
+            <FormControl fullWidth sx={{ mb: '1rem', display: 'flex', flexDirection: 'row', }}>
                 <Box sx={{
-                    display: 'block',
+                    display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    backgroundColor: 'beige',
-                    
+                    flexWrap: 'wrap',
+                    gap: '1rem',
+                    '& TextField': {
+                        flex: '1 1 300px',
+                    },
                 }}>
+
                     <TextField
                         label="User name"
                         type="text"
@@ -386,107 +388,98 @@ export default function RegisterFields(props) {
                         error={userError.userLastName}
                         helperText={userErrorMsg.userLastName}
                     />
-                </Box>
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    backgroundColor: 'beige',
-                    '& TextField': {
-                        width: 300
-                    }
-                }}>
-                <TextField
-                    label="Email"
-                    type="email"
-                    variant="standard"
-                    color='secondary'
-                    margin='normal'
-                    required
-                    value={user.userEmail}
-                    onChange={(e) => setUser({ ...user, userEmail: e.target.value })}
-                    onBlur={validateUserEmail}
-                    error={userError.userEmail}
-                    helperText={userErrorMsg.userEmail}
-                />
+               
+                    <TextField
+                        label="Email"
+                        type="email"
+                        variant="standard"
+                        color='secondary'
+                        margin='normal'
+                        required
+                        value={user.userEmail}
+                        onChange={(e) => setUser({ ...user, userEmail: e.target.value })}
+                        onBlur={validateUserEmail}
+                        error={userError.userEmail}
+                        helperText={userErrorMsg.userEmail}
+                    />
 
 
-                <br />
-                <TextField
-                    label="Date of birth"
-                    type="date"
-                    variant="outlined"
-                    color='secondary'
-                    required
-                    onBlur={validateUserDate}
-                    error={userError.userDofBirth}
-                    helperText={userErrorMsg.userDofBirth}
-                    InputLabelProps={{ shrink: true, }}
+                    <br />
+                    <TextField
+                        label="Date of birth"
+                        type="date"
+                        variant="outlined"
+                        color='secondary'
+                        required
+                        onBlur={validateUserDate}
+                        error={userError.userDofBirth}
+                        helperText={userErrorMsg.userDofBirth}
+                        InputLabelProps={{ shrink: true, }}
 
-                    inputRef={dateInputRef}
-                />
+                        inputRef={dateInputRef}
+                    />
 
-                <Autocomplete
-                    options={cities}
-                    renderInput={(params) => (
-                        <TextField
-                            sx={{ '& .MuiTextField-root': { m: 1, width: '100%' }, }}
-                            {...params}
-                            label="City"
-                            type="text"
-                            variant="standard"
-                            color='secondary'
-                            margin='normal'
-                            required
-                            value={user.userCity}
-                            onChange={(e) => setUser({ ...user, userCity: e.target.value })}
-                            onBlur={validateUserCity}
-                            error={userError.userCity}
-                            helperText={userErrorMsg.userCity}
-                        />
-                    )}
-                />
+                    <Autocomplete
+                        options={cities}
+                        renderInput={(params) => (
+                            <TextField
+                                sx={{ '& .MuiTextField-root': { m: 1, width: '100%' }, }}
+                                {...params}
+                                label="City"
+                                type="text"
+                                variant="standard"
+                                color='secondary'
+                                margin='normal'
+                                required
+                                value={user.userCity}
+                                onChange={(e) => setUser({ ...user, userCity: e.target.value })}
+                                onBlur={validateUserCity}
+                                error={userError.userCity}
+                                helperText={userErrorMsg.userCity}
+                            />
+                        )}
+                    />
 
-                <TextField
-                    label="Street name"
-                    type="text"
-                    variant="standard"
-                    color='secondary'
-                    margin='normal'
-                    required
-                    value={user.userStreet}
-                    onChange={(e) => setUser({ ...user, userStreet: e.target.value })}
-                    onBlur={validateUserStreet}
-                    error={userError.userStreet}
-                    helperText={userErrorMsg.userStreet}
-                />
+                    <TextField
+                        label="Street name"
+                        type="text"
+                        variant="standard"
+                        color='secondary'
+                        margin='normal'
+                        required
+                        value={user.userStreet}
+                        onChange={(e) => setUser({ ...user, userStreet: e.target.value })}
+                        onBlur={validateUserStreet}
+                        error={userError.userStreet}
+                        helperText={userErrorMsg.userStreet}
+                    />
 
-                <TextField
-                    label="Number"
-                    type="number"
-                    variant="standard"
-                    color='secondary'
-                    margin='normal'
-                    required
-                    value={user.userHomeNum}
-                    onChange={(e) => setUser({ ...user, userHomeNum: e.target.value })}
-                    inputProps={{ min: 1 }}
-                    onBlur={validateUserHomeNum}
-                    error={userError.userHomeNum}
-                    helperText={userErrorMsg.userHomeNum}
-                />
+                    <TextField
+                        label="Number"
+                        type="number"
+                        variant="standard"
+                        color='secondary'
+                        margin='normal'
+                        required
+                        value={user.userHomeNum}
+                        onChange={(e) => setUser({ ...user, userHomeNum: e.target.value })}
+                        inputProps={{ min: 1 }}
+                        onBlur={validateUserHomeNum}
+                        error={userError.userHomeNum}
+                        helperText={userErrorMsg.userHomeNum}
+                    />
 
-                <br />
-                <Button
-                    id="submitBTN"
-                    type='submit'
-                    variant="outlined"
-                    endIcon={<SendIcon />}
-                    color="secondary"
-                    onClick={registerUser}
-                >
-                    Register
-                </Button>
+                    <br />
+                    <Button
+                        id="submitBTN"
+                        type='submit'
+                        variant="outlined"
+                        endIcon={<SendIcon />}
+                        color="secondary"
+                        onClick={registerUser}
+                    >
+                        Register
+                    </Button>
                 </Box>
             </FormControl >
 
