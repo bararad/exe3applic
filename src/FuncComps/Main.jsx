@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
-import Register from './Register';
 import RegisterFields from './RegisterFields';
 import Login from './Login';
 import Profile from './Profile';
@@ -21,16 +19,19 @@ export default function Main() {
         //add to list
         setUsersList(newUsers);
     }
-
- 
-
-    //Check local storage on component mount- only when the page loaded
-    useEffect(() => {
+    const loadUsers=()=>{
+        
         const usersFromLocalStorage = localStorage.getItem('usersList');
         //debugger
         if (usersFromLocalStorage) {
             setUsersList(JSON.parse(usersFromLocalStorage));
         }
+    }
+
+
+    //Check local storage on component mount- only when the page loaded
+    useEffect(() => {
+        loadUsers();
     }, []);
 
     //runs foreach update in the usersList
@@ -38,12 +39,6 @@ export default function Main() {
         localStorage.setItem('usersList', JSON.stringify(usersList));
     }, [usersList]);
 
-
-
-    //func for admin login 
-    //  function login(username, pass){
-    //     if(is admin)
-    //   }
 
     console.log('Main-return userslist:', usersList);
 
@@ -55,18 +50,7 @@ export default function Main() {
             <Route path='/Profile' element={<Profile/>}/> 
             <Route path='/EditDetails' element={<EditDetails/>}/>
             <Route path='/SystemAdmin' element={<SystemAdmin/>}/> 
-            {/* <Route path='/Register'/> */}
-
-
-
-            {/* <Register usersList={usersList} /> */}
-        
-            {/* <Profile /> */}
-
-            {/* <EditDetails/> */}
-
-            {/* <SystemAdmin/> */}
-
+      
         </Routes>
     )
 }

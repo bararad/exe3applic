@@ -19,14 +19,15 @@ export default function Profile() {
   let adress = userInSession.userStreet + " " + userInSession.userHomeNum + "," + userInSession.userCity
   let fullname = (userInSession.userFirstName + " " + userInSession.userLastName);
   const onUpdateClick = () => {
+    navigate('/EditDetails')
 
   }
   const onToGameClick = () => {
-    console.log("a");
+    
     window.location.href="https://www.shooter-bubble.com/";
 
   }
-  const onDisconnectClick = () => {
+  const logoutUser = () => {
     sessionStorage.clear();
     navigate('/');
   }
@@ -80,7 +81,7 @@ export default function Profile() {
             </Button>
             <Button size='small' variant="contained"
               sx={{ backgroundColor: 'red', '&:hover': { backgroundColor: 'red' } }}
-              onClick={onDisconnectClick}>
+              onClick={logoutUser}>
               Disconnect
             </Button>
 
