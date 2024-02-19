@@ -6,10 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
+import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
 
 export default function Profile() {
 
   let userInSession = JSON.parse(sessionStorage.getItem('connectedUser'));
+
+
   console.log('usI', userInSession);
 
   let adress = userInSession.userStreet + " " + userInSession.userHomeNum + "," + userInSession.userCity
@@ -18,10 +23,12 @@ export default function Profile() {
 
   }
   const onToGameClick = () => {
-    <link href="" />
+    console.log("a");
+    window.location.href="https://www.shooter-bubble.com/";
 
   }
   const onDisconnectClick = () => {
+    sessionStorage.clear();
 
   }
 
@@ -43,24 +50,29 @@ export default function Profile() {
         </div>
         <div>
           <Typography color="text.secondary" gutterBottom>
+            <EmailOutlinedIcon sx={{ marginRight: 1, marginBottom: -0.8 }} />
             Email: {userInSession.userEmail}
           </Typography>
           <br />
           <Typography color="text.secondary" gutterBottom>
+            <RoomOutlinedIcon sx={{ marginRight: 1, marginBottom: -0.8 }} />
             Address: {adress}
           </Typography>
           <br />
           <Typography color="text.secondary" gutterBottom>
-            Birth Date: {userInSession.userDofBirth}
+            <CakeOutlinedIcon sx={{ marginRight: 1, marginBottom: -0.8 }} />
+              Birth Date: {userInSession.userDofBirth}
           </Typography>
           <br />
           <Box sx={{
             display: 'flex',
             flexDirection: 'row',
-            '& button': { m: 1 }
+            '& button': {
+              m: 1,
+            },
           }}>
             <Button size='small' variant="contained"
-              sx={{ backgroundColor: 'grey' }}
+              sx={{ backgroundColor: 'grey', '&:hover': { backgroundColor: 'grey' } }}
               onClick={onUpdateClick}>
               Update
             </Button>
@@ -68,10 +80,12 @@ export default function Profile() {
               To the Game
             </Button>
             <Button size='small' variant="contained"
-              sx={{ backgroundColor: 'red' }}
+              sx={{ backgroundColor: 'red', '&:hover': { backgroundColor: 'red' } }}
               onClick={onDisconnectClick}>
               Disconnect
             </Button>
+
+
           </Box>
         </div>
 

@@ -5,7 +5,7 @@ export default function EditDetails() {
 
   return (
     <div>
-EditDetails
+      EditDetails
     </div>
   )
 }

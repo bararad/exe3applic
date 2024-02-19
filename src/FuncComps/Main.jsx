@@ -6,6 +6,7 @@ import Login from './Login';
 import Profile from './Profile';
 import EditDetails from './EditDetails';
 import SystemAdmin from './SystemAdmin';
+import { Routes, Route} from 'react-router-dom';
 
 export default function Main() {
 
@@ -20,8 +21,8 @@ export default function Main() {
         setUsersList(newUsers);
     }
 
-    const getLoginUserDetails = (email,password) => {
-        
+    const getLoginUserDetails = (email, password) => {
+
     }
 
     //Check local storage on component mount- only when the page loaded
@@ -48,20 +49,25 @@ export default function Main() {
     console.log('Main-return userslist:', usersList);
 
     return (
-        <div>
 
-            <Register usersList={usersList} />
-            <br />
-            <RegisterFields send2Parent={getUserFromChild} />
+        <Routes>
+            <Route path='/' element={<Login users={usersList}/>}/> 
+            <Route path='/RegisterFields' element={<RegisterFields send2Parent={getUserFromChild}/>}/>
+            <Route path='/Profile' element={<Profile/>}/> 
+            <Route path='/EditDetails' element={<EditDetails/>}/>
+            <Route path='/SystemAdmin' element={<SystemAdmin/>}/> 
+            {/* <Route path='/Register'/> */}
 
-            <Login users={usersList} />
 
-            <br /><br />
-            <Profile/>
+
+            {/* <Register usersList={usersList} /> */}
+        
+            {/* <Profile /> */}
 
             {/* <EditDetails/> */}
 
             {/* <SystemAdmin/> */}
-        </div>
+
+        </Routes>
     )
 }

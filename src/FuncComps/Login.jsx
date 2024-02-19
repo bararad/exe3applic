@@ -4,10 +4,14 @@ import { Avatar, Box, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login(props) {
+
+    const navigate=useNavigate();
 
     const [userName, setUserName] = useState({ name: '', err: false, errMsg: '' });
     const [password, setPassword] = useState({ pw: '', err: false, errMsg: '' });
@@ -53,39 +57,19 @@ export default function Login(props) {
         }
         // Check if the users array is not empty
         if (users.length > 0) {
-                       // Check if a user with the provided username and password exists
+            // Check if a user with the provided username and password exists
             let founduser = users.find(user => user.userName == userName.name && user.userPassword == password.pw);//finds a user with the matching details
             if (founduser) {
                 console.log('User with matching username and password exists.');
                 // save in session storage
-                sessionStorage.setItem('connectedUser',JSON.stringify(founduser));
-                Swal.fire({
-                    icon: "success",
-                    title: "Logged in successfully",
-                    text: "Go to profile",
-                });
-                clearFileds();
+                sessionStorage.setItem('connectedUser', JSON.stringify(founduser));
             } else {
-                console.log('NO matching user.');
-                Swal.fire({
-                    icon: "error",
-                    title: "There is no registered user with this data",
-                    text: "check your inputs",                    
-                });
+                console.log('User with matching username and password does not exist in the array.');
             }
         } else {
             //users array is empty
             console.log('You have to register first');
-            Swal.fire({
-                icon: "error",
-                title: "There is no registered users in the system",
-                text: "Register first!",                    
-            });
         }
-    }
-    const clearFileds=()=>{
-        setUserName({name:''}),
-        setPassword({pw:''})
     }
 
     return (
@@ -144,6 +128,15 @@ export default function Login(props) {
                     onClick={loginUser}
                 >
                     Login
+                </Button>
+                <Button
+                    type='button'
+                    variant="outlined"
+                    endIcon={<HowToRegIcon />}
+                    color="secondary"
+                    onClick={()=>{navigate('/RegisterFields')}}
+                >
+                    Register
                 </Button>
 
             </Box>
