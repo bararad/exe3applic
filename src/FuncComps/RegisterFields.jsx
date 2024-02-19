@@ -292,7 +292,7 @@ export default function RegisterFields(props) {
                 }}>
                     <HowToRegOutlinedIcon />
                 </Avatar>
-                <Typography compomemt='h'>Sign up</Typography>
+                <Typography>Sign up</Typography>
             </Box>
 
             <FormControl fullWidth sx={{ mb: '1rem',display:'flex',flexDirection:'row',}}>

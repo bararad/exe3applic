@@ -9,13 +9,12 @@ import Box from '@mui/material/Box';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
 
+  let navigate=new useNavigate();
   let userInSession = JSON.parse(sessionStorage.getItem('connectedUser'));
-
-
-  console.log('usI', userInSession);
 
   let adress = userInSession.userStreet + " " + userInSession.userHomeNum + "," + userInSession.userCity
   let fullname = (userInSession.userFirstName + " " + userInSession.userLastName);
@@ -29,7 +28,7 @@ export default function Profile() {
   }
   const onDisconnectClick = () => {
     sessionStorage.clear();
-
+    navigate('/');
   }
 
   return (
