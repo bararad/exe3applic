@@ -17,24 +17,38 @@ export default function Login(props) {
     const validateUserName = (e) => {
         let text = e.target.value;
         const regex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:'",.<>\/?]{1,60}$/;
-        if (!regex.test(text)) {
-            setUserName((prev) => ({ ...prev, err: true, errMsg: 'Invalid input! Only English letters, numbers, and specific special characters allowed. Maximum 60 characters.' }));
-        } else {
+        if (regex.test(text)) {
             setUserName((prev) => ({ ...prev, name: text, err: false, errMsg: '' }));
+        } else {
+            setUserName((prev) => ({ ...prev, err: true, errMsg: 'Invalid input! Only English letters, numbers, and specific special characters allowed. Maximum 60 characters.' }));
         }
     };
 
     const validatePassword = (e) => {
+   
         let text = e.target.value;
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>\/?]).{7,12}$/;
-        if (!regex.test(text)) {
-            setPassword((prev) => ({ ...prev, err: true, errMsg: 'Invalid password! Password must contain between 7 and 12 characters, at least one special character, one uppercase letter, and one number.' }));
+        if (regex.test(text)||text === 'ad12343211ad') {
+           setPassword((prev) => ({ ...prev, pw: text, err: false, errMsg: '' }));
         } else {
-            setPassword((prev) => ({ ...prev, pw: text, err: false, errMsg: '' }));
+            setPassword((prev) => ({ ...prev, err: true, errMsg: 'Invalid password! Password must contain between 7 and 12 characters, at least one special character, one uppercase letter, and one number.' }));
         }
     };
 
     const loginUser = () => {
+
+        if (userName.name == "admin" && password.pw == "ad12343211ad") {
+            Swal.fire({
+                icon: "success",
+                title: "Welcome Admin",
+                text: "Redirecting",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/SystemAdmin');
+                }
+            });
+            return;
+        }
         if (userName.err) {
             console.log('cant login with invalid user name');
             return;
@@ -46,8 +60,7 @@ export default function Login(props) {
 
         if (users.length > 0) {
             let founduser = users.find(user => user.userName === userName.name && user.userPassword === password.pw);
-            if (founduser) 
-            {
+            if (founduser) {
                 console.log('User with matching username and password exists.');
                 sessionStorage.setItem('connectedUser', JSON.stringify(founduser));
                 clearFields();
@@ -61,8 +74,7 @@ export default function Login(props) {
                         navigate('/Profile');
                     }
                 });
-            }
-            else {
+            } else {
                 console.log('NO matching user.');
                 Swal.fire({
                     icon: "error",
@@ -85,6 +97,10 @@ export default function Login(props) {
         setPassword({ pw: '' });
     };
 
+    const isAdmin = () => {
+   
+    };
+
     return (
         <>
             <Box sx={{
@@ -97,7 +113,7 @@ export default function Login(props) {
                     m: 1
                 }}>
                 </Avatar>
-                <Typography >Login</Typography>
+                <Typography variant="h3">Login</Typography>
             </Box>
 
             <Box>
@@ -136,6 +152,7 @@ export default function Login(props) {
                     endIcon={<SendIcon />}
                     color="secondary"
                     onClick={loginUser}
+                    sx={{ margin: 2 }}
                 >
                     Login
                 </Button>

@@ -300,13 +300,13 @@ export default function EditDetails(props) {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        <Avatar sx={{
-          bgcolor: 'secondary.main',
-          m: 1
-        }}>
-          <HowToRegOutlinedIcon />
-        </Avatar>
-        <Typography>Sign up</Typography>
+          <Avatar
+              alt="User Avatar"
+              src={userInSession.userImage}
+              sx={{ width: 100, height: 100 }}
+          />
+          <br />
+        <Typography variant="h3">Edit Details</Typography>
       </Box>
 
       <FormControl fullWidth sx={{ mb: '1rem', display: 'flex', flexDirection: 'row', }}>
@@ -363,7 +363,7 @@ export default function EditDetails(props) {
           />
           <br />
           <TextField
-            label="Upload image"
+            label="Edit Image"
             type="file"
             variant="outlined"
             required
