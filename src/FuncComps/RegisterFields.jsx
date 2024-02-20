@@ -6,9 +6,11 @@ import SendIcon from '@mui/icons-material/Send';
 import Swal from 'sweetalert2';
 import { Avatar, Typography } from '@mui/material';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterFields(props) {
+    const navigate = useNavigate();
+
     const cities = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Beersheba',
         'Netanya', 'Eilat', 'Ashdod', 'Rishon LeZion'];
 
@@ -244,16 +246,21 @@ export default function RegisterFields(props) {
             });
         }
         else {
+            //send user obj to add it to users list
+            props.send2Parent(user);
+            clearFileds();
             //No validation errors
             console.log('No validation errors');
             Swal.fire({
                 icon: "success",
                 title: "User created!",
                 text: "Now you can login",
+            }).then((result) => {
+                // This code will be executed after the user interacts with the modal
+                if (result.isConfirmed) {
+                    navigate('/');
+                }
             });
-            //send user obj to add it to users list
-            props.send2Parent(user);
-            clearFileds();
         }
     }
 
@@ -318,8 +325,7 @@ export default function RegisterFields(props) {
                         error={userError.userName}
                         helperText={userErrorMsg.userName}
                         inputProps={{ maxLength: 60 }}
-                    />
-                    <br />
+                    />                   
                     <TextField
                         label="Password"
                         type="password"
