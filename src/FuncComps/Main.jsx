@@ -12,8 +12,10 @@ export default function Main() {
 
     //gets user from child and adds it to the list
     const getUserFromChild = (user) => {
-        console('in main',user);
-        let newUsers = [...usersList, user];
+        console.log('in main', user);
+        debugger
+        let userObj={[user.userEmail]: user};
+        let newUsers = [...usersList, userObj];
         // console.log('Main- updated user list', newUsers);
 
         //add to list
@@ -24,7 +26,7 @@ export default function Main() {
         const usersFromLocalStorage = localStorage.getItem('usersList');
         //debugger
         if (usersFromLocalStorage) {
-            setUsersList(JSON.parse(usersFromLocalStorage));
+            setUsersList(JSON.parse(usersFromLocalStorage));            
         }
     }
 
@@ -36,7 +38,7 @@ export default function Main() {
 
     //runs foreach update in the usersList
     useEffect(() => {
-        localStorage.setItem('usersList', JSON.stringify(usersList));
+        localStorage.setItem('usersList', JSON.stringify(usersList));        
     }, [usersList]);
 
 
