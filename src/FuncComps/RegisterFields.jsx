@@ -9,7 +9,7 @@ import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import { useNavigate } from 'react-router-dom';
 
 export default function RegisterFields(props) {
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
 
     const cities = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Beersheba',
         'Netanya', 'Eilat', 'Ashdod', 'Rishon LeZion'];
@@ -130,7 +130,7 @@ export default function RegisterFields(props) {
         if (!regex.test(email)) {
             setUserError(prev => { return { ...prev, userEmail: true, } })
             setUserErrorMsg((prev) => { return { ...prev, userEmail: "follow the format abc@something.com" } });
-        } else {
+        } else {            
             setUser(prev => { return { ...prev, userEmail: email } });
             setUserError(prev => { return { ...prev, userEmail: false, } })
             setUserErrorMsg((prev) => { return { ...prev, userEmail: '' } });
@@ -321,7 +321,7 @@ export default function RegisterFields(props) {
                         error={userError.userName}
                         helperText={userErrorMsg.userName}
                         inputProps={{ maxLength: 60 }}
-                    />                   
+                    />
                     <TextField
                         label="Password"
                         type="password"
@@ -390,7 +390,7 @@ export default function RegisterFields(props) {
                         error={userError.userLastName}
                         helperText={userErrorMsg.userLastName}
                     />
-               
+
                     <TextField
                         label="Email"
                         type="email"
