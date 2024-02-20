@@ -50,7 +50,7 @@ export default function Main() {
             <Route path='/RegisterFields' element={<RegisterFields send2Parent={getUserFromChild}/>}/>
             <Route path='/Profile' element={<Profile/>}/> 
             <Route path='/EditDetails' element={<EditDetails/>}/>
-            <Route path='/SystemAdmin' element={<SystemAdmin/>}/> 
+            <Route path='/SystemAdmin' element={<SystemAdmin users={usersList}/>}/> 
       
         </Routes>
     )

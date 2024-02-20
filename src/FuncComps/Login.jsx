@@ -27,7 +27,7 @@ export default function Login(props) {
    
         let text = e.target.value;
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>\/?]).{7,12}$/;
-        if (regex.test(text)||text === 'ad12343211ad') {
+        if (regex.test(text)||text === "ad12343211ad") {
            setPassword((prev) => ({ ...prev, pw: text, err: false, errMsg: '' }));
         } else {
             setPassword((prev) => ({ ...prev, err: true, errMsg: 'Invalid password! Password must contain between 7 and 12 characters, at least one special character, one uppercase letter, and one number.' }));
@@ -35,7 +35,7 @@ export default function Login(props) {
     };
 
     const loginUser = () => {
-
+    debugger
         if (userName.name == "admin" && password.pw == "ad12343211ad") {
             Swal.fire({
                 icon: "success",
@@ -73,6 +73,7 @@ export default function Login(props) {
                         navigate('/Profile');
                     }
                 });
+                return;
             } else {
                 console.log('NO matching user.');
                 Swal.fire({
@@ -96,9 +97,7 @@ export default function Login(props) {
         setPassword({ pw: '' });
     };
 
-    const isAdmin = () => {
-   
-    };
+  
 
     return (
         <>
