@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login(props) {
     const navigate = useNavigate();
-
     const [userName, setUserName] = useState({ name: '', err: false, errMsg: '' });
     const [password, setPassword] = useState({ pw: '', err: false, errMsg: '' });
     const users = props.users;

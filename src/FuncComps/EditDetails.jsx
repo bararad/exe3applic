@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Autocomplete, Box, FormControl } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from 'sweetalert2';
 import { Avatar, Typography } from '@mui/material';
-import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 
 
 export default function EditDetails(props) {
@@ -45,9 +44,6 @@ export default function EditDetails(props) {
   const [userError, setUserError] = useState({});
   const [userErrorMsg, setUserErrorMsg] = useState({});
 
-  //refs to uniqe fileds for clearing them later
-  const fileInputRef = useRef(null);
-  const dateInputRef = useRef(null);
 
   //validation for user name
   const validateUserName = (e) => {
@@ -267,28 +263,15 @@ export default function EditDetails(props) {
     }
   }
 
-  //clear all the fildes
-  const clearFileds = () => {
-    setUser({
-      userName: '',
-      userPassword: '',
-      password2: '',
-      userImage: '',
-      userFirstName: '',
-      userLastName: '',
-      userEmail: '',
-      userDofBirth: '',
-      userCity: '',
-      userStreet: '',
-      userHomeNum: ''
-    });
-    //clearing the special fileds
-    fileInputRef.current.value = '';
-    dateInputRef.current.value = '';
-  }
+
 
   const editUser= ()=> {
+    //creating array of userError and user to check that all fileds were validated and aren't empty
+    let validations = Object.values(userError);
+    let userFildes = Object.values(user);
 
+    console.log('validations: ', validations);
+    console.log('userFildes: ', userFildes);
 
   }
 
@@ -371,7 +354,6 @@ export default function EditDetails(props) {
             onBlur={validateImage}
             error={userError.userImage}
             helperText={userErrorMsg.userImage}
-            inputRef={fileInputRef}
             
           />
 
@@ -428,7 +410,6 @@ export default function EditDetails(props) {
             error={userError.userDofBirth}
             helperText={userErrorMsg.userDofBirth}
             InputLabelProps={{ shrink: true, }}
-            inputRef={dateInputRef}
           />
 
 

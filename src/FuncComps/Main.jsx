@@ -13,9 +13,8 @@ export default function Main() {
     //gets user from child and adds it to the list
     const getUserFromChild = (user) => {
         console.log('in main', user);
-        debugger
-        let userObj={[user.userEmail]: user};
-        let newUsers = [...usersList, userObj];
+        //let userObj={[user.userEmail]: user};
+        let newUsers = [...usersList, user];
         // console.log('Main- updated user list', newUsers);
 
         //add to list

@@ -71,15 +71,12 @@ export default function RegisterFields(props) {
     //validation for image
     const validateImage = (e) => {
         const file = e.target.files[0];
-        console.log('file: ', file);
 
         if (file) {
             const extension = file.name.split('.').pop().toLowerCase(); // Get the file extension
-            console.log('extension: ', extension);
             if (extension === 'jpg' || extension === 'jpeg') {
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    console.log('has been fully loaded');
                     //Result from the FileReader set the image in the state
                     setUser(prev => ({ ...prev, userImage: reader.result }));
                     setUserError(prev => { return { ...prev, userImage: false, } })
